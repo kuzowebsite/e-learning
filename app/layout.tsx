@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Company Training Platform",
   description: "Internal employee training and learning management system",
-    generator: 'v0.app'
+    generator: 'e-learning'
 }
 
 export default function RootLayout({
