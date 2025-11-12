@@ -7,7 +7,6 @@ import { useLanguage } from "@/contexts/language-context"
 import { DashboardNav } from "@/components/dashboard-nav"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { TrendingUp, Users, BookOpen, Award } from "lucide-react"
-import { DesktopSidebar } from "@/components/desktop-sidebar"
 
 export default function AnalyticsPage() {
   const { user, isLoading } = useAuth()
@@ -33,9 +32,7 @@ export default function AnalyticsPage() {
   return (
     <div className="min-h-screen bg-background">
       <DashboardNav />
-      <div className="flex">
-        <DesktopSidebar />
-      <main className="flex-1 p-4 md:p-6 lg:p-8 lg:ml-64 overflow-x-hidden">
+      <main className="lg:pl-64 p-4 md:p-8">
         <div className="max-w-7xl mx-auto space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <div>
             <h1 className="text-3xl font-bold tracking-tight">{t("analytics")}</h1>
@@ -131,7 +128,6 @@ export default function AnalyticsPage() {
           </Card>
         </div>
       </main>
-    </div>
     </div>
   )
 }
