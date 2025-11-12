@@ -21,12 +21,21 @@ export default function DashboardPage() {
     activeUsers: 0,
   })
 
+  // 🔹 Хэрвээ хэрэглэгч нэвтрээгүй бол /login руу
   useEffect(() => {
     if (!isLoading && !user) {
       router.push("/login")
     }
   }, [user, isLoading, router])
 
+  // 🔹 Employee хэрэглэгчийг /learning руу
+  useEffect(() => {
+    if (!isLoading && user?.role === "employee") {
+      router.push("/learning")
+    }
+  }, [user, isLoading, router])
+
+  // 🔹 Статистик тооцоолох
   useEffect(() => {
     const courses = getCourses()
     setStats({
@@ -37,7 +46,8 @@ export default function DashboardPage() {
     })
   }, [user])
 
-  if (isLoading || !user) {
+  // 🔹 Ачаалж байхад болон redirect хийж байх үед
+  if (isLoading || !user || user.role === "employee") {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="relative">
@@ -48,11 +58,7 @@ export default function DashboardPage() {
     )
   }
 
-  if (user.role === "employee") {
-    router.push("/learning")
-    return null
-  }
-
+  // ✅ Үндсэн Dashboard
   return (
     <div className="min-h-screen bg-background">
       <DashboardNav />
@@ -68,6 +74,7 @@ export default function DashboardPage() {
               </p>
             </div>
 
+            {/* Статистикийн картууд */}
             <div className="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 {
@@ -118,6 +125,7 @@ export default function DashboardPage() {
               ))}
             </div>
 
+            {/* Recent Activity хэсэг */}
             <Card
               className="animate-in fade-in-0 slide-in-from-bottom-4 duration-700"
               style={{ animationDelay: "500ms" }}
